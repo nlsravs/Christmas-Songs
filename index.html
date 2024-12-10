@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christmas Songs 🎁</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: url('https://cdn.pixabay.com/photo/2019/12/11/07/39/nature-4687676_640.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            color: #96d1f9;
+            margin: 0;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin: 30px;
+        }
+
+        .song-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .song {
+            font-size: 1.2em;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+            color: #c1e9ff;
+            text-shadow: 1px 1px 2px #000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .song span {
+            margin-right: 10px;
+            font-size: 1.5em;
+        }
+
+        .song .music-note {
+            color: #ffffff;
+        }
+
+        .play-pause-button {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .play-pause-button.playing {
+            color: #ffdf00;
+        }
+
+        footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 10px;
+            text-align: center;
+        }
+
+        footer p {
+            margin: 0;
+            color: #ffdf00;
+        }
+
+        /* Crystal Ball GIF Section */
+        .gif-container {
+            margin-top: 50px;
+            text-align: center;
+            
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .gif-container img {
+            width: 80%;
+            height: auto;
+            
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🎄 Christmas Songs 🎶</h1>
+    </header>
+
+    <main>
+        <!-- Song List Section -->
+        <div class="song-list">
+            <div class="song">
+                <div>💙 <span class="music-note">⭐</span> Jingle Bell Rock</div>
+                <button class="play-pause-button" onclick="togglePlayPause('Jingle Bell Rock', 'Jingle Bell RockBobby Helms 1957.mp3', this)">▶️</button>
+            </div>
+            <div class="song">
+                <div>💙 <span class="music-note">🎀</span> Under the Tree (The Christmas)</div>
+                <button class="play-pause-button" onclick="togglePlayPause('Under the Tree', 'Under the Tree.mp3', this)">▶️</button>
+            </div>
+            <div class="song">
+                <div>💙 <span class="music-note">☃️</span> Snow Man</div>
+                <button class="play-pause-button" onclick="togglePlayPause('Snow Man', 'snowman.mp3', this)">▶️</button>
+            </div>
+            <div class="song">
+                <div>💙 <span class="music-note">🎄</span> BTS V - Winter Bear</div>
+                <button class="play-pause-button" onclick="togglePlayPause('Winter Bear', 'Winter Bear BTS V.mp3', this)">▶️</button>
+            </div>
+            <div class="song">
+                <div>💙 <span class="music-note">❄️</span> Back To December</div>
+                <button class="play-pause-button" onclick="togglePlayPause('Back To December', 'Back to December.mp3', this)">▶️</button>
+            </div>
+            <div class="song">
+                <div>💙 <span class="music-note">🦌</span> Love Wins All - IU</div>
+                <button class="play-pause-button" onclick="togglePlayPause('Love Wins All', 'Love Wins All IU.mp3', this)">▶️</button>
+            </div>
+        </div>
+    </main>
+
+    <audio id="audioPlayer" controls style="display:none;"></audio>
+
+    <footer>
+        <p>© 2024 Christmas Songs. All rights reserved.</p>
+    </footer>
+
+    <!-- Crystal Ball GIF Section -->
+    <div class="gif-container">
+        <h2>☃️Happy Christmas🎄</h2>
+        <img src="crystal Ball.gif" alt="Crystal Ball GIF">
+    </div>
+
+    <script>
+        let currentlyPlayingSong = null;
+        let audioPlayer = document.getElementById('audioPlayer');
+
+        function togglePlayPause(songName, songSrc, button) {
+            // Stop the previous song if any
+            if (currentlyPlayingSong && currentlyPlayingSong !== songName) {
+                let previousButton = document.querySelector(`[onclick*="${currentlyPlayingSong}"]`);
+                if (previousButton) {
+                    previousButton.textContent = '▶️';  // Change previous song button back to play
+                    previousButton.classList.remove('playing');
+                }
+                audioPlayer.pause();
+            }
+
+            if (currentlyPlayingSong === songName && !audioPlayer.paused) {
+                // If the same song is clicked, pause it
+                audioPlayer.pause();
+                button.textContent = '▶️';  // Change to play button
+                button.classList.remove('playing');
+                currentlyPlayingSong = null;
+            } else {
+                // Play the new song
+                audioPlayer.src = songSrc;
+                audioPlayer.play();
+                button.textContent = '⏸️';  // Change to pause button
+                button.classList.add('playing');
+                currentlyPlayingSong = songName;
+            }
+        }
+    </script>
+</body>
+</html>
